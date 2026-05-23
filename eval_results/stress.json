@@ -1,0 +1,68 @@
+{
+  "model": "gemini-3.5-flash",
+  "question": "Will the Fed cut interest rates in Q3 2026?",
+  "fresh_runs": [
+    {
+      "n": 50,
+      "total_seconds": 69.8,
+      "persona_gen_seconds": 37.9,
+      "reasoning_seconds": 25.0,
+      "summary_seconds": 6.9,
+      "n_personas": 50,
+      "n_failed": 15,
+      "success_rate": 0.7,
+      "median_agent_latency_ms": 21458,
+      "p95_agent_latency_ms": 24447,
+      "summary_succeeded": true,
+      "estimated_cost_usd": 0.0136,
+      "headline": 0.14085714285714285,
+      "confidence_interval": [
+        0.06881257215214644,
+        0.21290171356213927
+      ]
+    },
+    {
+      "n": 100,
+      "total_seconds": 142.9,
+      "persona_gen_seconds": 84.0,
+      "reasoning_seconds": 50.0,
+      "summary_seconds": 8.9,
+      "n_personas": 100,
+      "n_failed": 27,
+      "success_rate": 0.73,
+      "median_agent_latency_ms": 19965,
+      "p95_agent_latency_ms": 24453,
+      "summary_succeeded": true,
+      "estimated_cost_usd": 0.0263,
+      "headline": 0.13945205479452055,
+      "confidence_interval": [
+        0.05456830404355226,
+        0.22433580554548885
+      ]
+    }
+  ],
+  "prior_runs": [
+    {
+      "n": 200,
+      "total_seconds": 207,
+      "persona_gen_seconds": 110,
+      "reasoning_seconds": 90,
+      "summary_seconds": 10,
+      "n_personas": 200,
+      "n_failed": 22,
+      "success_rate": 0.89,
+      "source": "earlier stress run (savings rate question)"
+    },
+    {
+      "n": 500,
+      "total_seconds": 425,
+      "persona_gen_seconds": 110,
+      "reasoning_seconds": 290,
+      "summary_seconds": 15,
+      "n_personas": 500,
+      "n_failed": 137,
+      "success_rate": 0.726,
+      "source": "live demo (Fed cut question)"
+    }
+  ]
+}

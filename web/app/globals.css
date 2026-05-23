@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #faf8f3;
+  color: #1a1a1a;
+  font-family: "SF Mono", Menlo, Monaco, ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  font-feature-settings: "tnum" 1, "zero" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.smcaps {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10.5px;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid #c4b8a0;
+  margin: 0;
+}
+
+input, textarea, button, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+::selection { background: #7a1f1f; color: #faf8f3; }

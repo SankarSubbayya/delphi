@@ -1,0 +1,72 @@
+{
+  "question": "Will US inflation stay above 3% through end of 2026?",
+  "n_personas": 8,
+  "models": [
+    "gemini-3.5-flash",
+    "gemini-2.5-flash"
+  ],
+  "results": [
+    {
+      "model": "gemini-3.5-flash",
+      "elapsed_seconds": 24.8,
+      "n_personas": 8,
+      "n_failed": 0,
+      "success_rate": 1.0,
+      "headline": 0.8674999999999999,
+      "confidence_interval": [
+        0.8049928575509737,
+        0.9300071424490262
+      ],
+      "distribution": {
+        "0.0-0.2": 0.0,
+        "0.2-0.4": 0.0,
+        "0.4-0.6": 0.0,
+        "0.6-0.8": 0.125,
+        "0.8-1.0": 0.875
+      },
+      "median_agent_latency_ms": 20947,
+      "mean_agent_latency_ms": 19834.8,
+      "summary": {
+        "headline_narrative": "A strong consensus of 86.8% predicts US inflation will remain above 3% through 2026, driven by geopolitical energy shocks and sticky local operating costs. Respondents across political and regional lines express deep skepticism toward official forecasts of cooling prices.",
+        "outlier_quote": "The Philly Fed's latest report claims inflation will magically drop to 2.5% by winter, but I'm not buying it.",
+        "outlier_attribution": "41yo hotel banquet captain, Philadelphia PA"
+      }
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "elapsed_seconds": 25.0,
+      "n_personas": 8,
+      "n_failed": 7,
+      "success_rate": 0.125,
+      "headline": 0.75,
+      "confidence_interval": [
+        0.75,
+        0.75
+      ],
+      "distribution": {
+        "0.0-0.2": 0.0,
+        "0.2-0.4": 0.0,
+        "0.4-0.6": 0.0,
+        "0.6-0.8": 1.0,
+        "0.8-1.0": 0.0
+      },
+      "median_agent_latency_ms": 24345,
+      "mean_agent_latency_ms": 24345.0,
+      "summary": {
+        "headline_narrative": "A synthetic-population study strongly leans towards US inflation remaining above 3% through the end of 2026, with 75% of agents forecasting this outcome.",
+        "outlier_quote": "It feels like prices for everything, especially gas and groceries, just keep going up, and that makes it really hard to save for a down payment.",
+        "outlier_attribution": "26yo administrative coordinator, Boise ID"
+      }
+    }
+  ],
+  "deltas": [
+    {
+      "base": "gemini-3.5-flash",
+      "compare": "gemini-2.5-flash",
+      "headline_delta_pp": -11.75,
+      "elapsed_delta_seconds": 0.2,
+      "success_rate_delta": -0.875,
+      "median_latency_delta_ms": 3398
+    }
+  ]
+}

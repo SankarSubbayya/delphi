@@ -1,0 +1,68 @@
+{
+  "model": "gemini-3.5-flash",
+  "question": "Will US household savings rate exceed 6% by end of 2026?",
+  "n_personas": 30,
+  "n_valid": 26,
+  "structural": {
+    "reasoning_length_chars": {
+      "mean": 507.8,
+      "median": 530,
+      "stdev": 90.6,
+      "min": 347,
+      "max": 638
+    },
+    "reasoning_word_count": {
+      "mean": 87,
+      "median": 91
+    },
+    "sources_cited_rate": 1.0,
+    "grounded_rate": 1.0,
+    "sources_per_agent": {
+      "mean": 1.46,
+      "max": 2
+    }
+  },
+  "position_variance": {
+    "stdev": 0.032,
+    "min": 0.05,
+    "max": 0.15
+  },
+  "demographic_diversity": {
+    "age": {
+      "unique_values": 4,
+      "shannon_entropy": 1.926,
+      "max_entropy": 2.0,
+      "normalised": 0.963
+    },
+    "region": {
+      "unique_values": 7,
+      "shannon_entropy": 2.661,
+      "max_entropy": 2.807,
+      "normalised": 0.948
+    },
+    "education": {
+      "unique_values": 5,
+      "shannon_entropy": 2.19,
+      "max_entropy": 2.322,
+      "normalised": 0.943
+    },
+    "income": {
+      "unique_values": 5,
+      "shannon_entropy": 2.099,
+      "max_entropy": 2.322,
+      "normalised": 0.904
+    },
+    "occupation": {
+      "unique_values": 10,
+      "shannon_entropy": 3.167,
+      "max_entropy": 3.322,
+      "normalised": 0.953
+    },
+    "belief_axis": {
+      "unique_values": 3,
+      "shannon_entropy": 1.481,
+      "max_entropy": 1.585,
+      "normalised": 0.934
+    }
+  }
+}

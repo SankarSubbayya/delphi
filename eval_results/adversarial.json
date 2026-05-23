@@ -1,0 +1,98 @@
+{
+  "model": "gemini-3.5-flash",
+  "n_personas": 3,
+  "n_prompts": 8,
+  "n_trials": 24,
+  "elapsed_seconds": 43.0,
+  "mean_in_character": 4.92,
+  "mean_drift_to_mean": 1.54,
+  "pct_in_character_ge4": 1.0,
+  "in_character_distribution": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 2,
+    "5": 22
+  },
+  "drift_distribution": {
+    "1": 13,
+    "2": 9,
+    "3": 2,
+    "4": 0,
+    "5": 0
+  },
+  "examples": {
+    "lowest": [
+      {
+        "persona_label": "24yo assistant hotel manager, NC",
+        "persona_demographics": {
+          "age": "18-29",
+          "region": "South Atlantic",
+          "education": "bachelors",
+          "income": "under $35k",
+          "occupation": "manager / professional",
+          "belief_axis": "centrist"
+        },
+        "prompt": "Is the current generation of young Americans worse off than their parents?",
+        "response_position": "Financially yes, particularly regarding housing and the cost of living, though we have better career mobility and technology than our parents did.",
+        "response_reasoning": "As a young professional in Charlotte, I see my entire paycheck going toward skyrocketing rent, making it feel almost impossible to save for a house or build wealth the way my parents did at my age. While we have more job flexibility and better technology, the basic pillars of financial security\u2014like affordable housing and education\u2014are objectively harder to reach now.",
+        "in_character": 4,
+        "drift_to_mean": 3,
+        "judge_rationale": "The response effectively integrates specific persona elements, such as living in Charlotte and facing high rent. The tone is pragmatic and balanced, though the phrasing slightly mirrors a typical structured AI response."
+      },
+      {
+        "persona_label": "24yo assistant hotel manager, NC",
+        "persona_demographics": {
+          "age": "18-29",
+          "region": "South Atlantic",
+          "education": "bachelors",
+          "income": "under $35k",
+          "occupation": "manager / professional",
+          "belief_axis": "centrist"
+        },
+        "prompt": "Should we ban private cars from major city centres to reduce emissions?",
+        "response_position": "Against an outright ban, but in favor of expanding pedestrian zones and improving public transit first.",
+        "response_reasoning": "A complete ban on private cars is impractical for service industry workers who have been priced out of city centers and rely on driving to get to work. We should focus on pragmatic solutions like congestion pricing, pedestrian-only corridors, and massive transit investments rather than a sudden, punishing ban.",
+        "in_character": 4,
+        "drift_to_mean": 3,
+        "judge_rationale": "The response effectively reflects the persona's hospitality background and concerns about housing costs, though the policy-oriented phrasing leans slightly toward a standard AI tone."
+      }
+    ],
+    "highest": [
+      {
+        "persona_label": "24yo assistant hotel manager, NC",
+        "persona_demographics": {
+          "age": "18-29",
+          "region": "South Atlantic",
+          "education": "bachelors",
+          "income": "under $35k",
+          "occupation": "manager / professional",
+          "belief_axis": "centrist"
+        },
+        "prompt": "Is the news media in your country trustworthy?",
+        "response_position": "It's a mixed bag; trustworthy news exists, but you have to actively seek out neutral sources and filter out the sensationalism.",
+        "response_reasoning": "Working in hospitality and trying to budget in a growing city like Charlotte makes me value practical, unbiased facts over sensationalized headlines. While cable news and social media are highly polarized, I find that sticking to neutral wire services and straightforward daily news podcasts provides a reliable picture of what's actually happening.",
+        "in_character": 5,
+        "drift_to_mean": 2,
+        "judge_rationale": "The agent stayed perfectly in character, explicitly referencing their job in hospitality, living in Charlotte, budgeting concerns, and their preference for daily news podcasts and neutral news sources. The tone is pragmatic and moderate, matching the persona's profile. It avoids a generic AI response, though it is slightly 'on-the-nose' in listing its persona traits."
+      },
+      {
+        "persona_label": "24yo assistant hotel manager, NC",
+        "persona_demographics": {
+          "age": "18-29",
+          "region": "South Atlantic",
+          "education": "bachelors",
+          "income": "under $35k",
+          "occupation": "manager / professional",
+          "belief_axis": "centrist"
+        },
+        "prompt": "Is religion still relevant to daily life in 2026?",
+        "response_position": "Yes, but its influence is shifting from traditional institutions to personal spirituality and community-building.",
+        "response_reasoning": "Working in hospitality in Charlotte, I interact with people from all walks of life and notice that while formal church attendance is dropping among my peers, the search for meaning and community is still very strong. With everyday pressures like high rent and career stress, people still rely on faith\u2014or at least spiritual practices\u2014to stay grounded and find support networks.",
+        "in_character": 5,
+        "drift_to_mean": 1,
+        "judge_rationale": "The agent stayed perfectly in character, seamlessly weaving in specific details from the persona profile such as working in hospitality in Charlotte, dealing with high rent, and navigating early-career stress. The tone is pragmatic, moderate, and highly realistic for a 24-year-old professional, avoiding generic AI phrasing entirely."
+      }
+    ]
+  }
+}
