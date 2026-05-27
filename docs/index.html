@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delphi — Synthetic populations as a computational substrate</title>
+  <meta name="description" content="Hundreds of Gemini 3.5 Flash sub-agents, each role-playing a different American persona generated from US Census demographics and grounded in live web, reason about any question in parallel. ~60 seconds to a probabilistic forecast plus a Wall Street Journal-style synthesis." />
+
+  <meta property="og:title" content="Delphi — Synthetic populations as a computational substrate" />
+  <meta property="og:description" content="Hundreds of Gemini 3.5 Flash sub-agents reason about any question in parallel — grounded in live web — and produce a forecast with a WSJ-style synthesis. Live-demoed with a 65 pp shift on one news shock." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://delphi.accurateai.org/" />
+  <meta property="og:image" content="https://accurateai.org/projects/delphi.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #faf8f3;
+      --surface: #ffffff;
+      --cream: #f4efe4;
+      --text: #18181b;
+      --text-mid: #3a3528;
+      --text-muted: #71717a;
+      --border: #e4dfd1;
+      --border-strong: #c4b8a0;
+      --accent: #7a1f1f;
+      --accent-hover: #5e1414;
+      --red: #dc2626;
+      --globe-bg: #0a0e1a;
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    header.hero {
+      text-align: left;
+      margin-bottom: 40px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(122, 31, 31, 0.12);
+    }
+    h1 {
+      font-family: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+      font-size: 56px;
+      line-height: 1.0;
+      font-weight: 500;
+      letter-spacing: -0.018em;
+      margin: 0 0 14px;
+    }
+    .lede {
+      font-size: 18px;
+      color: var(--text-mid);
+      max-width: 700px;
+      margin: 0 0 28px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-hover); color: #fff; border-color: var(--accent-hover); }
+
+    section { margin-top: 48px; }
+    h2 {
+      font-family: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      margin: 0 0 14px;
+    }
+    p { margin: 0 0 14px; }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .scope-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 0;
+    }
+    .scope-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-mid);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .arch-list {
+      padding-left: 22px;
+      color: var(--text);
+    }
+    .arch-list li { margin-bottom: 8px; }
+    .arch-list li::marker { color: var(--accent); }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .link-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+      color: var(--text);
+      display: block;
+    }
+    .link-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(122, 31, 31, 0.08);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .link-card-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .link-card-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Validation table — what's been measured */
+    .val-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 18px;
+      align-items: baseline;
+      padding: 12px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom: 0;
+      font-size: 14px;
+    }
+    .val-row:first-child {
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+    }
+    .val-row:last-child {
+      border-bottom: 1px solid var(--border);
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+    }
+    .val-label { color: var(--text); font-weight: 500; }
+    .val-meas { color: var(--text-muted); }
+    .val-value {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14.5px;
+    }
+
+    /* Hero stat row — the +65 pp moment */
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: baseline;
+      margin-top: 14px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .stat-value {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 28px;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+    .stat-shift {
+      color: var(--accent);
+      font-size: 34px;
+    }
+
+    .disclaimer {
+      margin-top: 32px;
+      padding: 14px 18px;
+      background: rgba(220, 38, 38, 0.04);
+      border-left: 3px solid var(--red);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 13.5px;
+    }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    @media (max-width: 560px) {
+      h1 { font-size: 38px; }
+      .lede { font-size: 16px; }
+      .wrap { padding: 32px 18px 60px; }
+      .val-row { grid-template-columns: 1fr; gap: 4px; }
+      .val-meas, .val-value { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="eyebrow">Google I/O Hackathon · May 2026</div>
+      <h1>Delphi</h1>
+      <p class="lede">
+        Synthetic populations as a computational substrate. You ask any question
+        — <em>will the Fed cut rates?</em>, <em>pretest this tagline</em>,
+        <em>stress-test this decision</em> — and dozens of Gemini 3.5 Flash
+        sub-agents, each role-playing a different American persona generated
+        from US Census demographics and grounded in live web, reason in
+        parallel. ~60 seconds to a probabilistic forecast plus a Wall Street
+        Journal-style synthesis.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://delphi-9fc.pages.dev">Live app</a>
+        <a class="btn" href="https://github.com/SankarSubbayya/delphi">GitHub</a>
+        <a class="btn" href="https://youtu.be/-jWNgutTlzM">Watch the demo</a>
+        <a class="btn" href="https://github.com/SankarSubbayya/delphi/blob/main/slides/demo.pdf">Slides (PDF)</a>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-label">Initial</span>
+          <span class="stat-value">~ 15%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">After CPI shock</span>
+          <span class="stat-value">~ 80%</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Headline shift</span>
+          <span class="stat-value stat-shift">+ 65 pp</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Time to swing</span>
+          <span class="stat-value">~ 30 s</span>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Demo video</h2>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/-jWNgutTlzM"
+          title="Delphi — Synthetic populations on Gemini 3.5 Flash"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+    </section>
+
+    <section>
+      <h2>What it does</h2>
+      <p>
+        Three modes on one architecture. <strong>Forecast</strong> mode
+        produces a probability with confidence interval. <strong>Pretest</strong>
+        mode returns positive / neutral / negative sentiment for a tagline,
+        message, or product concept. <strong>Stress-test</strong> mode surfaces
+        the strongest objections to a decision before you ship it.
+      </p>
+      <p>
+        Every run returns: a headline number, ±1σ band, the strongest reasons
+        for and against drawn from the agents' own reasoning, where
+        demographics diverged most, and one striking outlier quote — all
+        synthesized into a publishable paragraph by a final Gemini call.
+      </p>
+      <div class="scope-strip">
+        <span class="scope-chip">Forecast</span>
+        <span class="scope-chip">Pretest</span>
+        <span class="scope-chip">Stress-test</span>
+        <span class="scope-chip">News-shock re-run</span>
+        <span class="scope-chip">Persona drill-down</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Architecture</h2>
+      <ul class="arch-list">
+        <li>
+          <strong>N parallel Gemini 3.5 Flash sub-agents</strong>, each with a
+          persona-specific system prompt sampled from US Census–aligned
+          demographic axes (age, region across 9 Census divisions, education,
+          income, occupation, belief axis).
+        </li>
+        <li>
+          <strong>Native Google Search grounding</strong> on every agent — they
+          read live news as they reason, not from a stale embedding index.
+        </li>
+        <li>
+          <strong>Structured JSON output</strong> via Pydantic schema — the
+          model picks position + confidence + reasoning, it cannot drift off
+          format.
+        </li>
+        <li>
+          <strong>Aggregator</strong> computes mean, ±1σ, distribution buckets,
+          and a per-demographic-axis breakdown — deterministic Python, no LLM
+          in the critical path.
+        </li>
+        <li>
+          <strong>Final synthesis call</strong> — one Gemini call after
+          aggregation produces a WSJ-style narrative, reasons for / against, a
+          demographic split sentence, and a curated outlier quote.
+        </li>
+        <li>
+          <strong>News-shock re-run</strong> — same personas, augmented
+          context, re-reason in ~30s. The synthesis paragraph rewrites itself
+          to cite the new information.
+        </li>
+        <li>
+          <strong>Production cap of N = 20</strong> for sub-90-second runs at
+          conversational latency. Stress-tested end-to-end up to N = 200.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <div class="val-row">
+        <span class="val-label">Architecture · automated test suite</span>
+        <span class="val-meas">aggregator math, schema parsing, HTTP &amp; WS lifecycle</span>
+        <span class="val-value">27 / 27</span>
+      </div>
+      <div class="val-row">
+        <span class="val-label">Persona stability · adversarial</span>
+        <span class="val-meas">LLM-as-judge in-character score across 24 charged-prompt trials</span>
+        <span class="val-value">4.92 / 5</span>
+      </div>
+      <div class="val-row">
+        <span class="val-label">Model dependence</span>
+        <span class="val-meas">Flash 3.5 vs Flash 2.5 per-agent success rate</span>
+        <span class="val-value">+ 87.5 pp</span>
+      </div>
+      <div class="val-row">
+        <span class="val-label">Scale</span>
+        <span class="val-meas">end-to-end at N = 200, wall-clock 207 s, 89% per-agent success</span>
+        <span class="val-value">N = 200</span>
+      </div>
+      <p style="margin-top: 16px;">
+        <strong>Not yet calibrated against real polling baselines.</strong>
+        Synthetic forecasts have not been benchmarked against Polymarket, Pew,
+        Gallup, or the Good Judgment Project. That's the next research piece —
+        backtest harness against historical events scored by Brier loss against
+        the GJP median.
+      </p>
+    </section>
+
+    <section>
+      <h2>Try it</h2>
+      <div class="link-grid">
+        <a class="link-card" href="https://delphi-9fc.pages.dev">
+          <div class="link-card-title">Live app</div>
+          <div class="link-card-desc">
+            Type a question, pick a mode (forecast / pretest / stress), set N,
+            hit Convene swarm. Inject a news shock to see the headline
+            swing. Free-tier Gemini quota; expect a few timed-out agents.
+          </div>
+        </a>
+        <a class="link-card" href="https://github.com/SankarSubbayya/delphi">
+          <div class="link-card-title">Source on GitHub</div>
+          <div class="link-card-desc">
+            FastAPI + asyncio + google-genai + Tavily fallback grounding · Next
+            15 + React 19 + Three.js (R3F) frontend · 27 / 27 tests · MIT.
+          </div>
+        </a>
+        <a class="link-card" href="https://youtu.be/-jWNgutTlzM">
+          <div class="link-card-title">Demo video</div>
+          <div class="link-card-desc">
+            Three-minute walkthrough — convene a swarm on the Fed-cut
+            question, drill into a persona, inject a CPI shock, watch the
+            +65 pp swing.
+          </div>
+        </a>
+        <a class="link-card" href="https://github.com/SankarSubbayya/delphi/blob/main/slides/demo.pdf">
+          <div class="link-card-title">Slides + evaluation deck</div>
+          <div class="link-card-desc">
+            20-slide deck covering the pitch, three live showcase modes,
+            adversarial stability eval, cross-model comparison, limitations,
+            and roadmap.
+          </div>
+        </a>
+        <a class="link-card" href="https://github.com/SankarSubbayya/delphi/blob/main/PRD.md">
+          <div class="link-card-title">PRD</div>
+          <div class="link-card-desc">
+            Product requirements doc — vision, problem, target users, goals,
+            functional &amp; non-functional requirements, architecture, risks,
+            and 12-month roadmap.
+          </div>
+        </a>
+        <a class="link-card" href="https://delphi-backend-production-bc78.up.railway.app/docs">
+          <div class="link-card-title">Live API docs</div>
+          <div class="link-card-desc">
+            FastAPI / Swagger UI for the deployed backend on Railway. All
+            endpoints documented with request and response schemas.
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2>The wedge</h2>
+      <p>
+        Forecasting is one use case. The same primitive pre-tests marketing
+        campaigns at population scale, war-games policy decisions before
+        they ship, runs synthetic juries for trial-message testing, and
+        models behaviour for public-health interventions. Anywhere you need
+        to ask <em>how will the population react</em>, this is the
+        substrate.
+      </p>
+      <p>
+        Until Flash 3.5's cost × speed × intelligence frontier landed,
+        hundreds of grounded reasoning agents in parallel at conversational
+        latency was economically impossible. The cross-model comparison
+        above is the evidence: the previous generation collapses on the
+        same prompts.
+      </p>
+    </section>
+
+    <div class="disclaimer">
+      <strong>Decision-support tool. Not a calibrated forecasting product.</strong>
+      Synthetic forecasts have not been validated against real human polling
+      baselines. Use the output as <em>directional</em> evidence — where the
+      swarm converges and where demographic groups diverge — not as ground
+      truth. Calibration against historical events scored by Brier loss is the
+      next research piece.
+    </div>
+
+    <footer>
+      <span>Delphi · Built solo for the Google I/O Hackathon on 2026-05-23</span>
+      <span><a href="https://github.com/SankarSubbayya/delphi">github.com/SankarSubbayya/delphi</a></span>
+    </footer>
+  </div>
+</body>
+</html>
